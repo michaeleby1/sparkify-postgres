@@ -74,7 +74,6 @@ time_table_create = """
 songplay_table_insert = """
     INSERT INTO 
         songplays (
-            songplay_id,
             start_time,
             user_id,
             level,
@@ -139,15 +138,27 @@ time_table_insert = """
             year,
             weekday
         )
+        VALUES
+            (%s, %s, %s, %s, %s, %s, %s)
 """
 
 # FIND SONGS
 
 song_select = """
     SELECT
-        *
+        s.song_id,
+        a.artist_id
     FROM
-        songs
+        songs s
+    JOIN
+        artists a
+    ON 
+        s.artist_id = a.artist_id
+    WHERE
+      s.title = %s AND
+      a.name = %s AND
+      s.duration = %s
+      ;
 """
 
 # QUERY LISTS
