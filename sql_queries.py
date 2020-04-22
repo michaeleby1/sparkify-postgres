@@ -51,7 +51,7 @@ artist_table_create = """
             artist_id VARCHAR PRIMARY KEY,
             name VARCHAR,
             location VARCHAR,
-            latitute NUMERIC,
+            latitude NUMERIC,
             longitude NUMERIC
         )
 """
@@ -120,9 +120,11 @@ artist_table_insert = """
             artist_id,
             name,
             location,
-            latitutde,
+            latitude,
             longitude
         )
+        VALUES
+            (%s, %s, %s, %s, %s)
 """
 
 
