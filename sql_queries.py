@@ -84,7 +84,7 @@ songplay_table_insert = """
             user_agent
         )
         VALUES
-            (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            (%s, %s, %s, %s, %s, %s, %s, %s)
 """
 
 user_table_insert = """
