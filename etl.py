@@ -7,37 +7,43 @@ from sql_queries import *
 
 def process_song_file(cur, filepath):
     # open song file
-    df = 
+    df = pd.read_json(filepath, lines=True)
+
 
     # insert song record
-    song_data = 
+    song_data = list(df[['song_id', 'title', 'artist_id', 'year', 'duration']].values[0])
     cur.execute(song_table_insert, song_data)
     
     # insert artist record
-    artist_data = 
+    artist_data = list(df[['artist_id', 'artist_name', 'artist_location', 
+                       'artist_latitude', 'artist_longitude']].values[0])
     cur.execute(artist_table_insert, artist_data)
 
 
 def process_log_file(cur, filepath):
     # open log file
-    df = 
+    df = pd.read_json(filepath, lines=True)
 
     # filter by NextSong action
-    df = 
+    df = df[df['page'] == 'NextSong'] 
 
     # convert timestamp column to datetime
-    t = 
+    df['ts'] = pd.to_datetime(df['ts'], unit='ms')
     
     # insert time data records
-    time_data = 
-    column_labels = 
-    time_df = 
+    time_data = (df['ts'], df['ts'].dt.hour, df['ts'].dt.day, df['ts'].dt.week, 
+             df['ts'].dt.month, df['ts'].dt.year, df['ts'].dt.weekday)
+    column_labels = ('timestamp', 'hour', 'day', 'week_of_year', 'month', 'year', 'weekday')
+    data = dict(zip(column_labels, time_data))
+
+    time_df = pd.DataFrame(data)
 
     for i, row in time_df.iterrows():
         cur.execute(time_table_insert, list(row))
 
     # load user table
-    user_df = 
+    user_df = df[['userId', 'firstName', 'lastName', 'gender', 'level']]
+    user_df.drop_duplicates(inplace=True)
 
     # insert user records
     for i, row in user_df.iterrows():
@@ -56,9 +62,18 @@ def process_log_file(cur, filepath):
             songid, artistid = None, None
 
         # insert songplay record
-        songplay_data = 
+        songplay_data = (
+            row.ts,
+            row.userId,
+            row.level,
+            song_id,
+            artist_id,
+            row.sessionId,
+            row.location,
+            row.userAgent
+        )
         cur.execute(songplay_table_insert, songplay_data)
-
+        conn.commit()
 
 def process_data(cur, conn, filepath, func):
     # get all files matching extension from directory
