@@ -73,7 +73,6 @@ def process_log_file(cur, filepath):
             row.userAgent
         )
         cur.execute(songplay_table_insert, songplay_data)
-        conn.commit()
 
 def process_data(cur, conn, filepath, func):
     # get all files matching extension from directory
