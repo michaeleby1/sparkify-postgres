@@ -85,6 +85,7 @@ songplay_table_insert = """
         )
         VALUES
             (%s, %s, %s, %s, %s, %s, %s, %s)
+        ON CONFLICT DO NOTHING
 """
 
 user_table_insert = """
@@ -98,6 +99,7 @@ user_table_insert = """
         )
         VALUES
             (%s, %s, %s, %s, %s)
+        ON CONFLICT DO NOTHING
 """
 
 song_table_insert = """
@@ -111,6 +113,7 @@ song_table_insert = """
         )
         VALUES
             (%s, %s, %s, %s, %s)
+        ON CONFLICT DO NOTHING
 """
 
 artist_table_insert = """
@@ -124,6 +127,7 @@ artist_table_insert = """
         )
         VALUES
             (%s, %s, %s, %s, %s)
+        ON CONFLICT DO NOTHING
 """
 
 
@@ -140,6 +144,7 @@ time_table_insert = """
         )
         VALUES
             (%s, %s, %s, %s, %s, %s, %s)
+        ON CONFLICT DO NOTHING
 """
 
 # FIND SONGS

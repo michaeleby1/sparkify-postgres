@@ -57,9 +57,9 @@ def process_log_file(cur, filepath):
         results = cur.fetchone()
         
         if results:
-            songid, artistid = results
+            song_id, artist_id = results
         else:
-            songid, artistid = None, None
+            song_id, artist_id = None, None
 
         # insert songplay record
         songplay_data = (
