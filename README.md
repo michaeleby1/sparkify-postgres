@@ -10,5 +10,5 @@ I want to model these two datasets in as a star schema to store in a local Postg
 
 ## Database Schema
 
-![ERD](files/sparkify-postgres-erd.jpeg)
+![ERD](files/sparkify-postgres-erd.png)
 
