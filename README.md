@@ -12,3 +12,11 @@ I want to model these two datasets in as a star schema to store in a local Postg
 
 ![ERD](files/sparkify-postgres-erd.png)
 
+## Project Organization
+
+This schema can be replicated and populated by running the below two scripts:
+
+- <b>create_tables.py</b>: This script creates and connects to a database named `sparkifydb` and creates the fact table and four dimension tables via the <b>sql_queries.py</b> file.
+- <b>etl.py</b>: This script connects to the database, extracts and transforms the JSON files in log_data and song_data, and loads the data into the database according to the schema.
+
+The notebook <b>test.ipyb</b> allows for testing the database connection and running SQL queries on it.
